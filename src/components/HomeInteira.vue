@@ -3,19 +3,25 @@
   <div class="header-content">
     <div class="logomarca">
       <img src="https://img.icons8.com/3d-fluency/94/shopping-basket.png" alt="shopping-basket" />
-      <div class="logo-text">
+      <p class="logo-text">
         Compras.vue
-      </div>
+      </p>
     </div>
 
     <input type="text" placeholder="Digite sua busca" class="field-search" v-model="termoBusca">
 
-    <div>
+    <div class="ddflex">
       <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/shopping-cart--v1.png" alt="icone carrinho de compras"/>
-      <span>Carrinho</span>
+      <span class="t-icone-cart">Carrinho</span>
     </div>
 
-    <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/user--v1.png" alt="user--v1"/>
+    <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/user--v1.png" alt="user--v1" @click="submenuNavbar = !submenuNavbar" class="icone-user"/>
+
+    
+      <ul v-if="submenuNavbar" class="submenuNavbar">
+        <li>carlos@gmail.com</li>
+        <li>sair</li>
+      </ul>
     </div>
 
   </header>
@@ -102,12 +108,13 @@
   </footer>
 </template>
 
-<script setup>
+<script setup> 
 import { ref,computed } from 'vue';
 const modalCarrinho = ref(false);
 const termoBusca = ref('');
 const filtrarPor = ref('');
-
+const submenuNavbar = ref(true);
+import '@/css/home.css';
 
 const filtrados = computed(()=>{
   return produtos.value.filter(i=>i.item.toLowerCase().includes(termoBusca.value.toLowerCase()))
@@ -199,170 +206,4 @@ function fecharCarrinho() {
 
 </script>
 
-<style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 
-ul {
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-
-.container{
-  border:4px solid green;
-  max-width: 1024px;
-  width:100%;
-  margin: 0 auto;
-}
-
-@media (min-width: 500px) {
-  ul {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-}
-
-.cards-vitrine{
-  display: flex;
-  flex-wrap: wrap;
-  gap:1rem;
-}
-
-.card {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  border-radius: 3px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-height: 150px;
-  flex: 1 1 180px;
-}
-
-ul li button {
-  margin-top: auto;
-}
-
-.header-content {
-  display: flex;
-  position:fixed;
-  top: 0;
-  left: 0;
-  z-index: 200;
-  background-color: white;
-  box-shadow: 0 0 10px #00000050;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 3rem;
-  padding: 8px;
- }
-
-.logomarca {
-  display: flex;
-  align-items: center;
-}
-
-.logomarca img {
-  width: 50px;
-}
-
-.logo-text {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.field-search {
-  padding: .6rem 5px;
-  width: 50%;
-}
-
-.vitrine-online {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  padding: 5.6rem 1rem;
-}
-
-.aside-filter {
-  background: rgb(231, 219, 219, .4);
-  padding: 0 2rem;
-  min-height: 100vh;
-}
-
-.title-filter {
-  font-size: 1.1rem;
-  padding: 1rem 0;
-}
-
-.btn-comprar {
-  background-color: seagreen;
-  color: white;
-  cursor: pointer;
-  border: 0;
-  padding: 10px;
-}
-
-.carrinho-compras {
-  background-color: #f2f2f2;
-  position: fixed;
-  z-index: 10;
-  top: 3.4rem;
-  right: 0;
-  width: 100%;
-  max-width: 320px;
-  height: 100vh;
-}
-
-.footer-pagination {
-  background-color: #f2f2f2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.footer-pagination span {
-  font-size: 1.5rem;
-}
-
-.footer-pagination button img {
-  width: 33px;
-}
-
-.footer-pagination button {
-  border: 0;
-  cursor: pointer;
-  background-color: slategray;
-}
-
-.carrinho-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #ccc;
-  padding: 1rem;
-}
-
-.carrinho-content {
-  padding: 1rem;
-}
-
-.fechar-carrinho {
-  background-color: tomato;
-  font-size: 2rem;
-  padding: 0 .6rem;
-  border: 0;
-  color: white;
-  cursor: pointer;
-  border-radius: 4px;
-}
-</style>
