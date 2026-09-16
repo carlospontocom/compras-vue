@@ -1,12 +1,23 @@
 <template>
-  <header class="header">
+  <header>
+  <div class="header-content">
     <div class="logomarca">
       <img src="https://img.icons8.com/3d-fluency/94/shopping-basket.png" alt="shopping-basket" />
       <div class="logo-text">
         Compras.vue
       </div>
     </div>
-    <input type="text" placeholder="Digite sua busca" class="field-search">
+
+    <input type="text" placeholder="Digite sua busca" class="field-search" v-model="termoBusca">
+
+    <div>
+      <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/shopping-cart--v1.png" alt="icone carrinho de compras"/>
+      <span>Carrinho</span>
+    </div>
+
+    <img width="24" height="24" src="https://img.icons8.com/material-outlined/24/user--v1.png" alt="user--v1"/>
+    </div>
+
   </header>
 
   <section class="vitrine-online">
@@ -26,6 +37,11 @@
         <label for="item2"> Dell </label>
       </div>
 
+      <div>
+        <input type="checkbox" id="item3" />
+        <label for="item2"> Confort </label>
+      </div>
+
       <h5 class="title-filter">Por categoria </h5>
       <div>
         <input type="checkbox" id="cat1" />
@@ -40,13 +56,14 @@
         <input type="checkbox" id="cat3" />
         <label for="cat2"> Moda </label>
       </div>
-
-
-
+ 
     </div>
 
-    <ul>
-      <li v-for="item in produtos" :key="item.id">
+    <div>
+      <p>Quantidade encontrada: {{ filtrados.length }}</p> <br/>
+
+      <div class="cards-vitrine">
+      <div v-for="item in filtrados" :key="item.id" class="card">
         <p>
           {{ item.item }}
         </p>
@@ -54,8 +71,10 @@
           {{ item.valor }}
         </p>
         <button @click="abrirCarrinho" class="btn-comprar">Comprar</button>
-      </li>
-    </ul>
+      </div>
+      </div>
+    </div>
+
 
   </section>
 
@@ -84,8 +103,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref,computed } from 'vue';
 const modalCarrinho = ref(false);
+const termoBusca = ref('');
+const filtrarPor = ref('');
+
+
+const filtrados = computed(()=>{
+  return produtos.value.filter(i=>i.item.toLowerCase().includes(termoBusca.value.toLowerCase()))
+})
+
 
 const itemCarrinho = ref([
   {
@@ -98,51 +125,66 @@ const produtos = ref([
   {
     id: 1,
     item: "computador",
+    marca:"dell",
+    categoria:"informática",
     valor: 4550
   },
   {
     id: 2,
     item: "celular",
+    marca:"dell",
+    categoria:"eletrônico",
     valor: 1600
   },
   {
     id: 3,
     item: "tablet",
+    marca:"dell",
+    categoria:"eletrônico",
     valor: 1200
   },
   {
     id: 4,
     item: "monitor",
+    categoria:"informática",
     valor: 850
   },
   {
     id: 5,
     item: "teclado",
+    marca:"dell",
+    categoria:"informática",
     valor: 150
   },
   {
     id: 6,
-    item: "mouse",
+    item: "camisa",
+    marca:"confort",
+    categoria:"",
     valor: 90
   },
   {
     id: 7,
-    item: "impressora",
+    item: "tênis",
+    marca:"confort",
     valor: 650
   },
   {
     id: 8,
     item: "notebook",
+    marca:"consul",
     valor: 3800
   },
   {
     id: 9,
     item: "headset",
+    marca:"consul",
     valor: 280
   },
   {
     id: 10,
     item: "webcam",
+    marca:"dell",
     valor: 220
   }
 ]);
@@ -171,6 +213,14 @@ ul {
   gap: 1rem;
 }
 
+
+.container{
+  border:4px solid green;
+  max-width: 1024px;
+  width:100%;
+  margin: 0 auto;
+}
+
 @media (min-width: 500px) {
   ul {
     list-style: none;
@@ -180,22 +230,30 @@ ul {
   }
 }
 
-ul li {
+.cards-vitrine{
+  display: flex;
+  flex-wrap: wrap;
+  gap:1rem;
+}
+
+.card {
   border: 1px solid #ccc;
   padding: 1rem;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  min-height: 100%;
+  max-height: 150px;
+  flex: 1 1 180px;
 }
 
 ul li button {
   margin-top: auto;
 }
 
-.header {
-  position: fixed;
+.header-content {
+  display: flex;
+  position:fixed;
   top: 0;
   left: 0;
   z-index: 200;
@@ -203,10 +261,11 @@ ul li button {
   box-shadow: 0 0 10px #00000050;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
   gap: 3rem;
   padding: 8px;
-}
+ }
 
 .logomarca {
   display: flex;

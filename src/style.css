@@ -12,4 +12,5 @@ html{
   margin: 0 auto;
   max-width: 1200px;
   padding: 0 1rem;
+  border:3px solid red;
 }
