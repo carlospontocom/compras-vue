@@ -32,6 +32,7 @@ ul {
   display: flex;
   flex-wrap: wrap;
   gap:1rem;
+  padding: 0 3rem 1rem 3rem;
 }
 
 .card {
@@ -99,7 +100,13 @@ ul li button {
 .vitrine-online {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  padding: 5.6rem 1rem;
+  padding: 5.6rem 1rem 0 1rem;
+  margin: 0 auto;
+  max-width: 1200px;;
+}
+
+.sepador-item-checkbox{
+  padding: .4rem 0;
 }
 
 .icone-user{
@@ -124,9 +131,34 @@ ul li button {
   min-height: 100vh;
 }
 
+@media (max-width:568px){
+
+  .vitrine-online{
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .aside-filter{
+    display: none;
+  }
+}
+
+.qtn-encontrada{
+  padding-left: 3rem;
+}
+
 .title-filter {
   font-size: 1.1rem;
   padding: 1rem 0;
+}
+
+.btn-limpar-filter{
+  background-color: tomato;
+  cursor: pointer;
+  border: 0;
+  color: white;
+  padding: 5px 1rem;
+  margin-top: 3rem;
 }
 
 .btn-comprar {
@@ -146,29 +178,7 @@ ul li button {
   width: 100%;
   max-width: 320px;
   height: 100vh;
-}
-
-.footer-pagination {
-  background-color: #f2f2f2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.footer-pagination span {
-  font-size: 1.5rem;
-}
-
-.footer-pagination button img {
-  width: 33px;
-}
-
-.footer-pagination button {
-  border: 0;
-  cursor: pointer;
-  background-color: slategray;
-}
+} 
 
 .carrinho-header {
   display: flex;
@@ -192,3 +202,8 @@ ul li button {
   border-radius: 4px;
 }
  
+.footer-pagination{
+  background-color: #ccc;
+  text-align: center;
+  padding: 5px;
+}

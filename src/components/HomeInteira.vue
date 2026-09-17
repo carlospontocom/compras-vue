@@ -29,44 +29,46 @@
   <section class="vitrine-online">
     <div class="aside-filter">
       <h5 class="title-filter">Por marca</h5>
-      <div>
-        <input type="checkbox" id="item1" />
-        <label for="item1"> Nokia </label>
+      <div class="sepador-item-checkbox">
+        <input type="checkbox" id="nokia" />
+        <label for="nokia"> Nokia </label>
       </div>
 
-      <div>
-        <input type="checkbox" id="item2" />
-        <label for="item2"> Consul </label>
+      <div class="sepador-item-checkbox">
+        <input type="checkbox" id="consul" />
+        <label for="consul"> Consul </label>
       </div>
-      <div>
-        <input type="checkbox" id="item3" />
-        <label for="item2"> Dell </label>
+      <div class="sepador-item-checkbox">
+        <input type="checkbox" id="dell" />
+        <label for="dell"> Dell </label>
       </div>
 
-      <div>
-        <input type="checkbox" id="item3" />
-        <label for="item2"> Confort </label>
+      <div class="sepador-item-checkbox">
+        <input type="checkbox" id="confort" />
+        <label for="confort"> Confort </label>
       </div>
 
       <h5 class="title-filter">Por categoria </h5>
-      <div>
-        <input type="checkbox" id="cat1" />
-        <label for="cat1"> Eletrônicos </label>
+      <div class="sepador-item-checkbox">
+        <input type="checkbox" id="catEletronicos" />
+        <label for="catEletronicos"> Eletrônicos </label>
       </div>
-      <div>
-        <input type="checkbox" id="cat2" />
-        <label for="cat2"> Informática </label>
+      <div class="sepador-item-checkbox">
+        <input type="checkbox" id="catInformatica" />
+        <label for="catInformatica"> Informática </label>
       </div>
 
-      <div>
-        <input type="checkbox" id="cat3" />
-        <label for="cat2"> Moda </label>
+      <div class="sepador-item-checkbox">
+        <input type="checkbox" id="catModa" />
+        <label for="catModa"> Moda </label>
       </div>
+
+      <button class="btn-limpar-filter"> Limpar filtros</button>
  
     </div>
 
     <div>
-      <p>Quantidade encontrada: {{ filtrados.length }}</p> <br/>
+      <p class="qtn-encontrada">Quantidade encontrada: {{ filtrados.length }}</p> <br/>
 
       <div class="cards-vitrine">
       <div v-for="item in filtrados" :key="item.id" class="card">
@@ -98,13 +100,9 @@
   </div>
 
   <footer class="footer-pagination">
-    <button>
-      <img src="https://img.icons8.com/ios-filled/50/double-left.png" alt="double-left" />
-    </button>
+    <button><<</button>
     <span>1/5</span>
-    <button>
-      <img src="https://img.icons8.com/ios-filled/50/double-right.png" alt="double-left" />
-    </button>
+    <button>>></button>
   </footer>
 </template>
 
@@ -113,7 +111,7 @@ import { ref,computed } from 'vue';
 const modalCarrinho = ref(false);
 const termoBusca = ref('');
 const filtrarPor = ref('');
-const submenuNavbar = ref(true);
+const submenuNavbar = ref(false);
 import '@/css/home.css';
 
 const filtrados = computed(()=>{
